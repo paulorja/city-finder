@@ -1,24 +1,30 @@
-# README
+# CITY FINDER
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The api is running on:
+heroku-url
 
-Things you may want to cover:
+## Dependencies
+* docker
+* docker-compose
 
-* Ruby version
+## Install
+```shell
+./install.sh
+```
 
-* System dependencies
+## Start
+```shell
+./start.sh
+```
 
-* Configuration
+## Test
+```shell
+./test.sh
+```
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Rails commands
+```
+docker-compose run web rails db:migrate
+docker-compose run web rails g model city
+docker-compose run web rails console
+```
