@@ -29,14 +29,7 @@ Style/ClassAndModuleChildren:
 
 # Offense count: 5
 Style/Documentation:
-  Exclude:
-    - 'spec/**/*'
-    - 'test/**/*'
-    - 'app/helpers/application_helper.rb'
-    - 'app/models/application_record.rb'
-    - 'config/application.rb'
-    - 'db/migrate/20210121034747_create_states.rb'
-    - 'db/migrate/20210121042008_create_cities.rb'
+  Enabled: false
 
 # Offense count: 2
 # Cop supports --auto-correct.
@@ -99,3 +92,6 @@ Style/RedundantArgument: # (new in 1.4)
   Enabled: true
 Style/SwapValues: # (new in 1.1)
   Enabled: true
+
+Metrics/BlockLength:
+  Max: 50

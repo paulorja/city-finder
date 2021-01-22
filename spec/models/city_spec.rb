@@ -12,4 +12,15 @@ RSpec.describe City, type: :model do
   describe 'validations' do
     it { should validate_presence_of(:name) }
   end
+
+  describe 'contains name scope' do
+    it {
+      city = City.contains_name('florianopolis').first
+      expect(city.name).to eq 'Florianópolis'
+    }
+    it {
+      city = City.contains_name('alegre').first
+      expect(city.name).to eq 'Porto Alegre'
+    }
+  end
 end
