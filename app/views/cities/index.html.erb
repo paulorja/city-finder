@@ -21,22 +21,3 @@
     </div>
   </div>
 </div>
-
-
-
-<script>
-window.addEventListener("load", () => {
-  const element = document.querySelector("#cities-form");
-  element.addEventListener("ajax:success", (event) => {
-    const [_data, _status, xhr] = event.detail;
-    cities = JSON.parse(xhr.responseText);
-    document.getElementById('cities-result').innerHTML = '';
-    cities.forEach(function(city) {
-      document.getElementById('cities-result').innerHTML += '<li class="list-group-item">' + city["name"] + '</li>';
-    });
-    if(cities.length == 0) {
-      document.getElementById('cities-result').innerHTML = 'Nenhuma cidade encontrada.';
-    }
-  });
-});
-</script>
