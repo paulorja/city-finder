@@ -1,2 +1,20 @@
-<h1>Cities#index</h1>
-<p>Find me in app/views/cities/index.html.erb</p>
+<h1>Consultar Cidades</h1>
+
+<%= form_tag '/cities/search', id: 'cities-form', method: :get, remote: true do %>
+  <%= label_tag  "Procurar cidades..." %>
+  <%= select_tag "state_id", "<option>Todos os Estados</option>#{options_from_collection_for_select(State.all, "id", "name")}".html_safe %>
+  <%= text_field_tag :name, params[:search] %>
+  <%= submit_tag 'Search', name: nil %>
+<% end %>
+
+<div id='cities-result'></div>
+
+<script>
+window.addEventListener("load", () => {
+  const element = document.querySelector("#cities-form");
+  element.addEventListener("ajax:success", (event) => {
+    const [_data, _status, xhr] = event.detail;
+	  document.getElementById('cities-result').innerHTML = xhr.responseText;
+  });
+});
+</script>
