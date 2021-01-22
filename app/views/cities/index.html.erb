@@ -1,20 +1,42 @@
-<h1>Consultar Cidades</h1>
+<div class="container px-4">
+  <div class="row gx-5">
+    <div class="col">
+     <div class="p-3 border bg-light text-center">
+      <h1>Consultar Cidades</h1>
 
-<%= form_tag '/cities/search', id: 'cities-form', method: :get, remote: true do %>
-  <%= label_tag  "Procurar cidades..." %>
-  <%= select_tag "state_id", "<option>Todos os Estados</option>#{options_from_collection_for_select(State.all, "id", "name")}".html_safe %>
-  <%= text_field_tag :name, params[:search] %>
-  <%= submit_tag 'Search', name: nil %>
-<% end %>
+      <%= form_tag '/cities/search', id: 'cities-form', method: :get, remote: true, class: 'form-inline' do %>
+        <div class="input-group">
+          <%= select_tag "state_id", states_options, class: 'form-select', style: 'max-width: 250px;' %>
+          <%= text_field_tag :name, params[:search], class: 'form-control', placeholder: 'Digite o nome da cidade...' %>
+          <%= submit_tag 'Buscar!', name: nil, class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+     </div>
+    </div>
+  </div>
+  <div class="row gx-5">
+    <div class="col">
+      <ul id='cities-result' class="list-group">
+      </ul>
+    </div>
+  </div>
+</div>
 
-<div id='cities-result'></div>
+
 
 <script>
 window.addEventListener("load", () => {
   const element = document.querySelector("#cities-form");
   element.addEventListener("ajax:success", (event) => {
     const [_data, _status, xhr] = event.detail;
-	  document.getElementById('cities-result').innerHTML = xhr.responseText;
+    cities = JSON.parse(xhr.responseText);
+    document.getElementById('cities-result').innerHTML = '';
+    cities.forEach(function(city) {
+      document.getElementById('cities-result').innerHTML += '<li class="list-group-item">' + city["name"] + '</li>';
+    });
+    if(cities.length == 0) {
+      document.getElementById('cities-result').innerHTML = 'Nenhuma cidade encontrada.';
+    }
   });
 });
 </script>
