@@ -17,9 +17,9 @@ heroku-url
 ./start.sh
 ```
 
-## Test
+## Rubocop && Tests
 ```shell
-./test.sh
+./rubocop_and_test.sh
 ```
 
 ## Rails commands
